@@ -49,4 +49,27 @@ describe Event do
 			expect(event).to have(1).error_on(:start_at)
 		end
 	end
+
+	describe 'for_today' do
+		it 'returns an event that starts today' do
+			event = FactoryGirl.create(:event, start_at: Time.now)
+			expect(Event.for_today).to include(event)
+		end
+
+		it 'does not return an event that starts tomorrow' do
+			event = FactoryGirl.create(:event, start_at: 1.day.from_now)
+			expect(Event.for_today).not_to include(event)
+			# expect(Event.for_today).to be_empty
+			# expect(Event.for_today).to eq([])
+			# expect(Event.for_today).not_to exist
+			# expect(Event.for_today.count).to eq(0)
+			# expect(Event.for_today.count).to be_zero
+			#  todo esto son alternativas al primer expect
+		end
+
+		it 'does not return an event that has started' do
+			event = FactoryGirl.create(:event, start_at: Time.now - 1.day)
+			expect(Event.for_today).not_to include(event)
+		end
+	end
 end

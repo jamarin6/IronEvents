@@ -21,11 +21,15 @@ private
 
   def start_at_is_before?
   	if start_at.present? && end_at.present?
-	  	if start_at > end_at
+	  	if start_at > end_at # la fecha menor es anterior
 	  		errors.add(:start_at, "la fecha de fin no puede ser anterior a la de inicio")
 	 	end
 	end
   end
 
+  def self.for_today
+  	where(["DATE(start_at) = ?", Date.today])
+  	
+  end    # esto de DATE para que tome solo el dia sin la hora
 
 end
