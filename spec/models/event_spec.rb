@@ -43,5 +43,10 @@ describe Event do
 			event = Event.new start_at: nil
 			expect(event).to have(1).error_on(:start_at)
 		end
+
+		it 'is invalid when start_at is before end date' do
+			event = Event.new start_at: '2014-03-15', end_at: '2014-03-14'
+			expect(event).to have(1).error_on(:start_at)
+		end
 	end
 end
