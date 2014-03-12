@@ -17,6 +17,7 @@ class EventsController < ApplicationController
     @event = Event.create(create_params)
 
     redirect_to events_path
+    # render 'new'
   end
 
   def edit
