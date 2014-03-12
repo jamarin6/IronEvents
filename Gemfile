@@ -34,15 +34,13 @@ end
 
 group :development, :test do
 	gem 'rspec-rails'
-end
-
-group :development, :test do
 	gem 'factory_girl_rails'
+	gem 'capybara'
+	gem 'selenium-webdriver'
 end
 
-group :development, :test do
-	gem 'capybara'
-end
+gem 'devise'
+gem 'bcrypt'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

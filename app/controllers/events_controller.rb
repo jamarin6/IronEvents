@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+
+before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+ 
   def index
     @events = Event.all
 
@@ -6,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    
+    @event = Event.find(params[:id])
   end
 
   def new
