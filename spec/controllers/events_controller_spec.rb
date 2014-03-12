@@ -38,6 +38,11 @@ describe EventsController do
 
   describe '#create' do
 
+  	before do
+  		@user = FactoryGirl.create(:user)
+  		sign_in @user
+  	end
+
   	 it 'create a new event1' do
   		attrs = {
   			name: 'my_event1',
@@ -46,7 +51,7 @@ describe EventsController do
   			end_at: 1.day.from_now,
   			address: 'calle pepito 6'
   		}   #attrs = FactoryGirl.attributes_for(:event)
-  		expect {post :create, event: attrs }.to change(Event, :count)# .by(2) es xa q se creasen 2
+  		expect {post :create, event: attrs }.to change(Event, :count) # .by(2) es xa q se creasen 2
 
   		#expect(response).to redirect_to(assigns (:event))
   		# expect(response).to redirect_to(event_url)
@@ -60,6 +65,11 @@ describe EventsController do
   end
 
   describe '#new' do
+
+  	before do
+  		@user = FactoryGirl.create(:user)
+  		sign_in @user
+  	end
 
   	it 'create a new Empty Event' do
   		get :new

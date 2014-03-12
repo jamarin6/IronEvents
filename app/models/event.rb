@@ -1,10 +1,12 @@
 class Event < ActiveRecord::Base
+  belongs_to :user
 	validates :name, presence: true, length: { maximum: 60 }
 	# validates_presence_of :name
 	# validates_length_of :name, maximum: 60
-	validates :description, length: {minimum: 5}, allow_blank: true
+	validates :description, length: {minimum: 100}, allow_blank: true
 	validate :start_at_is_present #aqui al ser validacion nuestra propia es en singular
 	validate :start_at_is_before?
+  validates :user, presence: true
 
 #private
 #	def description_present?

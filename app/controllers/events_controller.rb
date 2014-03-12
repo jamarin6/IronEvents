@@ -17,10 +17,17 @@ before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destro
   end
 
   def create
-    @event = Event.create(create_params)
+    @event = Event.new(create_params)
+    @event.user = current_user
 
-    redirect_to events_path
-    # render 'new'
+    #@event = Event.create(create_params)
+
+    
+    if @event.save
+     redirect_to @event
+    else
+     render :new
+    end
   end
 
   def edit
