@@ -3,9 +3,13 @@ class EventsController < ApplicationController
 before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
  
   def index
-    @events = Event.all
+    @events = Event.all #Event.for_today
 
-    Event.for_today
+    respond_to do |format|
+      format.html
+      format.json
+    end
+
   end
 
   def show
