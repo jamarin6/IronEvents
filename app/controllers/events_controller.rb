@@ -14,24 +14,28 @@ before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destro
 
   def new
     @event = Event.new
+    authorize @event
   end
 
   def create
     @event = Event.new(create_params)
     @event.user = current_user
 
+    authorize @event
+
     #@event = Event.create(create_params)
 
     
     if @event.save
-     redirect_to @event
-    else
-     render :new
-    end
+     redirect_to @event #root_path # es como pasar event con su :id
+    else                # se ve en la ruta event_path q necesita
+     render :new        # su :id , la ruta completa aki abajo
+    end         # event_path   GET   /events/:id(.:format)   events#show        
   end
 
   def edit
-    @event = Event.find params[:id]
+    @event = Event.find (params[:id])
+    authorize @event
 
   end
 

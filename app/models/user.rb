@@ -10,6 +10,5 @@ class User < ActiveRecord::Base
  # 	if password.length != 10
  # 		errors.add(:password, "password erroneo")
  # 	end
- # end
-
+ # en
 end
